@@ -2,7 +2,7 @@ name: Continuous Integration Checking
 on:
   pull_request:
     types: [opened, ready_for_review, review_requested, synchronize]
-  push: 
+  push:
     branches: ["master", "develop"]
 jobs:
   build:
@@ -23,6 +23,6 @@ jobs:
           TESTRAIL_DOMAIN: ${{ secrets.DOMAIN }}
           TESTRAIL_USERNAME: ${{ secrets.USERNAME }}
           TESTRAIL_PASSWORD: ${{ secrets.PASSWORD }}
-          TESTRAIL_PROJECTID: 1
-          TESTRAIL_SUITEID: 1
+          TESTRAIL_PROJECTID: 2
+          TESTRAIL_SUITEID: 2
           TESTRAIL_ASSIGNEDTOID: 1
