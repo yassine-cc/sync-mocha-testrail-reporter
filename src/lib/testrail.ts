@@ -71,7 +71,8 @@ export class TestRail {
    */
   public fetchCases(
     filters?: { [key: string]: number[] },
-    callback?: Function
+    callback?: Function,
+    error?: Function
   ): void {
     let filter = "";
     if (filters) {
@@ -88,6 +89,11 @@ export class TestRail {
         if (callback) {
           callback(body.cases);
         }
+      },
+      (err) => {
+        if (error) {
+          error(err);
+        }
       }
     );
   }
@@ -103,7 +109,8 @@ export class TestRail {
     name: string,
     description: string,
     results: TestRailResult[],
-    callback?: Function
+    callback?: Function,
+    error?: Function
   ): void {
     console.log(`Publishing ${results.length} test result(s) to ${this.base}`);
 
@@ -129,8 +136,18 @@ export class TestRail {
             if (callback) {
               callback(body);
             }
+          },
+          (err) => {
+            if (error) {
+              error(err);
+            }
           }
         );
+      },
+      (err) => {
+        if (error) {
+          error(err);
+        }
       }
     );
   }

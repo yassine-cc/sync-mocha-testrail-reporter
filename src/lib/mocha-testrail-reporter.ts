@@ -103,7 +103,8 @@ ${this.out.join("\n")}
           name,
           description,
           results,
-          (result) => cb(null, result)
+          (result) => cb(null, result),
+          (error) => cb(error, null)
         );
       })();
     });
