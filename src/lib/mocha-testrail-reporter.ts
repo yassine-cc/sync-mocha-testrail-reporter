@@ -1,4 +1,5 @@
 import { reporters } from "mocha";
+import deasync = require("deasync");
 import { TestRail } from "./testrail";
 import { titleToCaseIds } from "./shared";
 import { Status, TestRailOptions, TestRailResult } from "./testrail.interface";
@@ -96,7 +97,15 @@ Total: ${total}
 Execution details:
 ${this.out.join("\n")}                     
 `;
-      new TestRail(reporterOptions).publish(name, description, this.results);
+      const results = this.results;
+      deasync((cb) => {
+        new TestRail(reporterOptions).publish(
+          name,
+          description,
+          results,
+          (result) => cb(null, result)
+        );
+      })();
     });
   }
 
